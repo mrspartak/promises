@@ -1,6 +1,6 @@
 {
   "name": "@mrspartak/promises",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Promise utils",
   "private": false,
   "main": "./dist/index.js",
@@ -53,7 +53,9 @@
     "./web": "./dist/web.js"
   },
   "sideEffects": false,
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "publishConfig": {
     "access": "public"
   }

@@ -10,8 +10,8 @@
   "license": "MIT",
   "scripts": {
     "build": "tsup",
-    "test": "pnpm test:src:run && pnpm test:build",
-    "test:build": "vitest run --dir test/built",
+    "test": "pnpm test:src:run && pnpm test:dist",
+    "test:dist": "vitest run --dir test/build",
     "test:src": "vitest --coverage --dir test/src",
     "test:src:run": "vitest run --coverage --dir test/src",
     "check:format": "biome format --write ./src",

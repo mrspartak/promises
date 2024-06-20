@@ -1,0 +1,60 @@
+{
+  "name": "@mrspartak/promises",
+  "version": "0.0.0",
+  "description": "Promise utils",
+  "private": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "author": "Spartak Kagramanyan",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsup",
+    "test": "pnpm test:src:run && pnpm test:build",
+    "test:build": "vitest run --dir test/built",
+    "test:src": "vitest --coverage --dir test/src",
+    "test:src:run": "vitest run --coverage --dir test/src",
+    "check:format": "biome format --write ./src",
+    "check:lint": "biome lint ./src",
+    "local:node": "tsx local/main.ts",
+    "prepublishOnly": "node ./bin/prepublish.js && pnpm build && agadoo",
+    "version": "pnpm doc && git add docs",
+    "release": "cross-env RELEASE_MODE=true np",
+    "doc": "typedoc --logLevel Verbose"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.8.0",
+    "@vitest/coverage-v8": "^1.6.0",
+    "agadoo": "^3.0.0",
+    "cross-env": "^7.0.3",
+    "lefthook": "^1.6.15",
+    "np": "^10.0.5",
+    "tsup": "^8.1.0",
+    "tsx": "^4.15.4",
+    "typedoc": "^0.25.13",
+    "typedoc-material-theme": "^1.0.2",
+    "typedoc-plugin-coverage": "^3.2.0",
+    "typedoc-plugin-include-example": "^1.2.0",
+    "typedoc-plugin-missing-exports": "^2.3.0",
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./web": "./dist/web.js"
+  },
+  "sideEffects": false,
+  "files": ["dist"],
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,3 +1,4 @@
 import { to } from "./to";
+import { delay, sleep } from "./delay";
 
-export { to };
+export { to, delay, sleep };

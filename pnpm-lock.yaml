@@ -8,6 +8,9 @@ devDependencies:
   '@biomejs/biome':
     specifier: 1.8.0
     version: 1.8.0
+  '@types/web':
+    specifier: ^0.0.149
+    version: 0.0.149
   '@vitest/coverage-v8':
     specifier: ^1.6.0
     version: 1.6.0(vitest@1.6.0)
@@ -708,6 +711,10 @@ packages:
 
   /@types/normalize-package-data@2.4.4:
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
+    dev: true
+
+  /@types/web@0.0.149:
+    resolution: {integrity: sha512-xQHorJ1SBC7lbabYAW8TM/nWHR4JcxOMEdNHs8Orv31e4uB/OXD/OtF5uN+ArSmx7qAENejm44I2NqXlntUfaQ==}
     dev: true
 
   /@vitest/coverage-v8@1.6.0(vitest@1.6.0):

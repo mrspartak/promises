@@ -58,3 +58,18 @@ if (apiError) {
   // Handle error
 }
 ```
+
+### `delay` Pause Execution for a Specified Time
+
+The delay function pauses the execution of your code for a specified number of milliseconds. This can be useful in various scenarios, such as waiting for an operation to complete, introducing a delay between retries, or simply pausing execution for debugging purposes.
+
+```ts
+import { delay } from "@mrspartak/promises"
+import { parsePage } from "./parser"
+
+for (let i = 0; i < 10; i++) {
+  // Parse the page and wait for 1 second before parsing the next page
+  const pageData = await parsePage(i)
+  await delay(1000)
+}
+```

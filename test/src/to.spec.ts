@@ -21,6 +21,31 @@ describe('to', () => {
     expect(await to(new Promise((_, reject) => reject(error)))).toStrictEqual([error, null])
   })
 
+  it('should call finally', async () => {
+    let called = false
+    await to(new Promise((resolve) => resolve('test')), () => {
+      called = true
+    })
+    expect(called).toBe(true)
+  })
+
+  it('should call finally even if promise is rejected', async () => {
+    let called = false
+    await to(new Promise((_, reject) => reject('test')), () => {
+      called = true
+    })
+    expect(called).toBe(true)
+  })
+
+  it('should await finally', async () => {
+    let called = false
+    await to(new Promise((resolve) => resolve('test')), async () => {
+      await new Promise((resolve) => setTimeout(resolve, 100))
+      called = true
+    })
+    expect(called).toBe(true)
+  })
+
   it('should throw an error if string is thrown', async () => {
     const error = 'error 123'
     const [err] = await to(new Promise((_, reject) => reject(error)))

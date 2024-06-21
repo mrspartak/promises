@@ -1,6 +1,6 @@
 {
   "name": "@mrspartak/promises",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Promise utilities",
   "private": false,
   "main": "./dist/index.js",

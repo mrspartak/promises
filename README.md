@@ -64,8 +64,10 @@ if (apiError) {
 
 The delay function pauses the execution of your code for a specified number of milliseconds. This can be useful in various scenarios, such as waiting for an operation to complete, introducing a delay between retries, or simply pausing execution for debugging purposes.
 
+! The function has alias `sleep`
+
 ```ts
-import { delay } from "@mrspartak/promises"
+import { delay, sleep } from "@mrspartak/promises"
 import { parsePage } from "./parser"
 
 for (let i = 0; i < 10; i++) {
@@ -73,4 +75,7 @@ for (let i = 0; i < 10; i++) {
   const pageData = await parsePage(i)
   await delay(1000)
 }
+
+// You can also use alias sleep instead of delay
+await sleep(1000)
 ```

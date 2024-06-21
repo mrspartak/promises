@@ -12,14 +12,14 @@
   "homepage": "https://mrspartak.github.io/promises",
   "scripts": {
     "build": "tsup",
-    "test": "pnpm test:src:run && pnpm test:dist",
+    "test": "pnpm build && pnpm test:src:run && pnpm test:dist",
     "test:dist": "vitest run --dir test/build",
     "test:src": "vitest --coverage --dir test/src",
     "test:src:run": "vitest run --coverage --dir test/src",
     "check:format": "biome format --write ./src",
     "check:lint": "biome lint ./src",
     "local:node": "tsx local/main.ts",
-    "prepublishOnly": "node ./bin/prepublish.js && pnpm build && agadoo",
+    "prepublishOnly": "node ./bin/prepublish.js && agadoo",
     "version": "pnpm doc && git add docs",
     "release": "cross-env RELEASE_MODE=true np",
     "doc": "typedoc --logLevel Verbose"

@@ -14,7 +14,8 @@
 
 ## Contents
 - [Installation](#Installation)
-- [API to](#to---Simplified-Promise-Handling-with-Tuples)
+- [to](#to---Simplified-Promise-Handling-with-Tuples)
+- [delay](#delay---Pause-Execution-for-a-Specified-Time)
 
 ## Installation
 ```sh
@@ -59,7 +60,7 @@ if (apiError) {
 }
 ```
 
-### `delay` Pause Execution for a Specified Time
+### `delay` - Pause Execution for a Specified Time
 
 The delay function pauses the execution of your code for a specified number of milliseconds. This can be useful in various scenarios, such as waiting for an operation to complete, introducing a delay between retries, or simply pausing execution for debugging purposes.
 

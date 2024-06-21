@@ -16,6 +16,7 @@
 - [Installation](#Installation)
 - [to](#to---Simplified-Promise-Handling-with-Tuples)
 - [delay](#delay---Pause-Execution-for-a-Specified-Time)
+- [timeout](#timeout---Timeout-a-Promise)
 
 ## Installation
 ```sh
@@ -78,4 +79,19 @@ for (let i = 0; i < 10; i++) {
 
 // You can also use alias sleep instead of delay
 await sleep(1000)
+```
+
+### `timeout` - Timeout a Promise
+
+The timeout function allows you to set a maximum time for a promise to resolve. If the promise does not resolve within the specified time, an error is thrown.
+
+```ts
+import { timeout } from "@mrspartak/promises"
+import { api } from "./api"
+
+// Simple timeout
+const user = await timeout(api.get("/me"), 1000) // Timeout after 1 second
+
+// With custom error message
+const user = await timeout(api.get("/me"), 1000, "Request timed out")
 ```

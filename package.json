@@ -12,10 +12,11 @@
   "homepage": "https://mrspartak.github.io/promises",
   "scripts": {
     "build": "tsup",
-    "test": "pnpm build && pnpm test:src:run && pnpm test:dist",
+    "test": "pnpm build && pnpm test:src:run && pnpm test:dist && pnpm test:report",
     "test:dist": "vitest run --dir test/build",
     "test:src": "vitest --coverage --dir test/src",
     "test:src:run": "vitest run --coverage --dir test/src",
+    "test:report": "dotenvx run -- coveralls",
     "check:format": "biome format --write ./src",
     "check:lint": "biome lint ./src",
     "local:node": "tsx local/main.ts",
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.0",
+    "@dotenvx/dotenvx": "^0.45.0",
     "@types/web": "^0.0.149",
     "@vitest/coverage-v8": "^1.6.0",
     "agadoo": "^3.0.0",

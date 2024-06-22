@@ -6,6 +6,7 @@
   <a href="https://npmjs.com/package/@mrspartak/promises"><img src="https://img.shields.io/npm/v/@mrspartak/promises.svg" alt="npm package"></a>
   <a href="https://npmjs.com/package/@mrspartak/promises"><img src="https://img.shields.io/bundlephobia/min/%40mrspartak/promises.svg" alt="bundle size"></a>
   <a href="https://npmjs.com/package/@mrspartak/promises"><img src="https://img.shields.io/npm/dw/%40mrspartak%2Fpromises.svg" alt="downloads"></a>
+  <a href='https://coveralls.io/github/mrspartak/promises?branch=master'><img src='https://coveralls.io/repos/github/mrspartak/promises/badge.svg?branch=master' alt='Coverage Status' /></a>
 </p>
 <br/>
 

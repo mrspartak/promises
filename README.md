@@ -92,11 +92,11 @@ The timeout function allows you to set a maximum time for a promise to resolve. 
 import { timeout } from "@mrspartak/promises"
 import { api } from "./api"
 
-// Simple timeout
-const user = await timeout(api.get("/me"), 1000) // Timeout after 1 second
-
-// With custom error message
-const user = await timeout(api.get("/me"), 1000, "Request timed out")
+// Can be used as a race condition
+const [error, user] = await timeout(api.getUser(), 1000)
+if (error) {
+  // error can be either a timeout error or an error from the api
+}
 ```
 
 ### `deferred` - Create a Deferred Promise

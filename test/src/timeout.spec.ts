@@ -13,7 +13,9 @@ describe('timeout', () => {
 
   it('should return the value', async () => {
     const value = 'value'
-    expect(await timeout(new Promise((resolve) => resolve('value')), 100)).toStrictEqual(value)
+    const [error, result] = await timeout(new Promise((resolve) => resolve('value')), 100)
+    expect(error).toBeNull()
+    expect(result).toBe(value)
   })
 
   it('should throw an error if time is not a number', async () => {
@@ -28,14 +30,23 @@ describe('timeout', () => {
   })
 
   it('should throw an error if promise rejects', async () => {
-    await expect(timeout(new Promise((_, reject) => reject('error')), 100)).rejects.toThrowError('error')
+    const [error, result] = await timeout(new Promise((_, reject) => reject('error')), 100)
+    expect(error).toBeInstanceOf(Error)
+    expect(error?.message).toBe('error')
+    expect(result).toBeNull()
   })
 
   it('should throw an error if promise times out', async () => {
-    await expect(timeout(delay(105), 100)).rejects.toThrowError('Timeout')
+    const [error, result] = await timeout(delay(105), 100)
+    expect(error).toBeInstanceOf(Error)
+    expect(error?.message).toBe('Timeout')
+    expect(result).toBeNull()
   })
 
   it('should throw an error if promise times out with custom message', async () => {
-    await expect(timeout(delay(105), 100, 'custom error')).rejects.toThrowError('custom error')
+    const [error, result] = await timeout(delay(105), 100, 'custom error')
+    expect(error).toBeInstanceOf(Error)
+    expect(error?.message).toBe('custom error')
+    expect(result).toBeNull()
   })
 })

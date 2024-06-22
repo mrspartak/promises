@@ -1,3 +1,5 @@
+import { to } from "./to.js";
+
 /**
  * Type alias for a promise of type T.
  */
@@ -6,7 +8,7 @@ type TimeoutIn<T> = Promise<T>;
 /**
  * Return type for the timeout function.
  */
-type TimeoutOut<T> = Promise<T>;
+type TimeoutOut<T> = [Error, null] | [null, T];
 
 /**
  * This function ensures that a provided promise is resolved within a specified time.
@@ -16,12 +18,11 @@ type TimeoutOut<T> = Promise<T>;
  * @param {Promise<T>} promise - The promise to be awaited.
  * @param {number} ms - The number of milliseconds to wait.
  * @param {string} [message] - The error message to throw.
- * @returns {Promise<T>} The resolved value of the promise.
- * @throws {Error} Throws an error if the input time is not a positive number or if the promise times out.
+ * @returns {Promise<[Error, null] | [null, T]>} A promise that resolves to a tuple containing either an error or the result.
  * 
  * @includeExample examples/timeout.ts
  */
-export async function timeout<T>(promise: TimeoutIn<T>, ms: number, message?: string): TimeoutOut<T> {
+export async function timeout<T>(promise: TimeoutIn<T>, ms: number, message?: string): Promise<TimeoutOut<T>> {
   // Validate that the input time is a number
   if (typeof ms !== 'number') {
     throw new Error('timeout(ms) requires a number as a parameter');
@@ -41,5 +42,5 @@ export async function timeout<T>(promise: TimeoutIn<T>, ms: number, message?: st
   });
 
   // Return a race between the input promise and the timeout promise
-  return Promise.race([promise, timeoutPromise]);
+  return await to(Promise.race([promise, timeoutPromise]));
 }

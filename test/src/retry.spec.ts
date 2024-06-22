@@ -13,54 +13,62 @@ describe('retry', () => {
   })
 
   it('should resolve after the first attempt', async () => {
-    const promise = retry(() => Promise.resolve('test'), 1)
-    expect(await promise).toBe('test')
+    const [error, result] = await retry(() => Promise.resolve('test'), 1)
+    expect(error).toBeNull()
+    expect(result).toBe('test')
   })
 
   it('should reject after the first attempt', async () => {
-    const promise = retry(() => Promise.reject('test'), 1)
-    await expect(promise).rejects.toStrictEqual(Error('test'))
+    const [error, result] = await retry(() => Promise.reject('test'), 1)
+    expect(error).toBeInstanceOf(Error)
+    expect(error?.message).toBe('test')
+    expect(result).toBeNull()
   })
 
   it('should not accept a negative number of attempts', async () => {
-    expect(() => retry(() => Promise.resolve('test'), -1)).rejects.toThrowError('attempts must be greater than 0')
+    const [error] = await retry(() => Promise.resolve('test'), -1)
+    expect(error).toBeInstanceOf(Error)
+    expect(error?.message).toBe('retry: attempts must be greater than 0')
   })
 
   it('should not accept a non-integer number of attempts', async () => {
-    expect(() => retry(() => Promise.resolve('test'), 1.5)).rejects.toThrowError('attempts must be an integer')
+    const [error] = await retry(() => Promise.resolve('test'), 1.5)
+    expect(error).toBeInstanceOf(Error)
+    expect(error?.message).toBe('retry: attempts must be a positive integer')
   })
 
   it('should not accept a zero number of attempts', async () => {
-    expect(() => retry(() => Promise.resolve('test'), 0)).rejects.toThrowError('attempts must be greater than 0')
+    const [error] = await retry(() => Promise.resolve('test'), 0)
+    expect(error).toBeInstanceOf(Error)
+    expect(error?.message).toBe('retry: attempts must be greater than 0')
   })
 
   it('should not accept a negative delay', async () => {
-    expect(() => retry(() => Promise.resolve('test'), 1, { delay: -1 })).rejects.toThrowError('delay must be greater than or equal to 0')
+    const [error] = await retry(() => Promise.resolve('test'), 1, { delay: -1 })
+    expect(error).toBeInstanceOf(Error)
+    expect(error?.message).toBe('retry: delay must be non-negative')
   })
 
   it("should respect the delay option", async () => {
-    const promise = retry(() => Promise.reject('test'), 2, { delay: 10 })
     const start = Date.now()
-    await to(promise)
+    await retry(() => Promise.reject('test'), 2, { delay: 10 })
     const end = Date.now()
     expect(end - start).toBeGreaterThanOrEqual(8) // Timers are not precise, so we allow a small margin of error
   })
 
   it("should not delay if the delay option is 0", async () => {
-    const promise = retry(() => Promise.reject('test'), 2, { delay: 0 })
     const start = Date.now()
-    await to(promise)
+    await retry(() => Promise.reject('test'), 2, { delay: 0 })
     const end = Date.now()
     expect(end - start).toBeLessThan(10)
   })
 
   it("should work with a successful retry after failure", async () => {
     let attempt = 0
-    const promise = retry(() => {
+    const [error, result] = await retry(() => {
       attempt++;
       return attempt === 1 ? Promise.reject('error') : Promise.resolve('success')
     }, 2)
-    const [error, result] = await to(promise)
     expect(error).toBeNull()
     expect(result).toBe('success')
     expect(attempt).toBe(2)

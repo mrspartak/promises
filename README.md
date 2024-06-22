@@ -20,6 +20,7 @@
 - [timeout](#timeout---Timeout-a-Promise)
 - [deferred](#deferred---Create-a-Deferred-Promise)
 - [retry](#retry---Retry-a-Promise-Returning-Function)
+- [duration](#duration---Measure-the-Time-Taken-for-a-Promise-to-Resolve)
 
 ## Installation
 ```sh
@@ -128,4 +129,19 @@ import { apiCall } from "./api"
 // Retry the API call up to 3 times with a delay of 1000 milliseconds between attempts
 const result = await retry(() => apiCall(), 3, { delay: 1000 })
 console.log(result)
+```
+
+### `duration` - Measure the Time Taken for a Promise to Resolve
+
+The `duration` function allows you to measure the time it takes for a promise to resolve or reject. This is useful for performance monitoring and debugging asynchronous operations in your code.
+
+```ts
+import { duration } from "@mrspartak/promises"
+import { apiCall } from "./api"
+
+// Measure the time taken to resolve the API call
+const [error, result, time] = await duration(apiCall())
+if (error) {
+  // Handle error
+}
 ```

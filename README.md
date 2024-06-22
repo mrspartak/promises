@@ -18,6 +18,7 @@
 - [delay](#delay---Pause-Execution-for-a-Specified-Time)
 - [timeout](#timeout---Timeout-a-Promise)
 - [deferred](#deferred---Create-a-Deferred-Promise)
+- [retry](#retry---Retry-a-Promise-Returning-Function)
 
 ## Installation
 ```sh
@@ -113,4 +114,17 @@ setTimeout(() => {
 }, 1000)
 
 await promise // Will wait for 1 second before resolving
+```
+
+### `retry` - Retry a Promise-Returning Function
+
+The `retry` function allows you to retry a promise-returning function a specified number of times with an optional delay between attempts if it fails. This can be useful for handling transient errors, such as network requests that may occasionally fail.
+
+```ts
+import { retry } from "@mrspartak/promises"
+import { apiCall } from "./api"
+
+// Retry the API call up to 3 times with a delay of 1000 milliseconds between attempts
+const result = await retry(() => apiCall(), 3, { delay: 1000 })
+console.log(result)
 ```

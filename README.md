@@ -17,6 +17,7 @@
 - [to](#to---Simplified-Promise-Handling-with-Tuples)
 - [delay](#delay---Pause-Execution-for-a-Specified-Time)
 - [timeout](#timeout---Timeout-a-Promise)
+- [deferred](#deferred---Create-a-Deferred-Promise)
 
 ## Installation
 ```sh
@@ -94,4 +95,22 @@ const user = await timeout(api.get("/me"), 1000) // Timeout after 1 second
 
 // With custom error message
 const user = await timeout(api.get("/me"), 1000, "Request timed out")
+```
+
+### `deferred` - Create a Deferred Promise
+
+The deferred function allows you to manually resolve or reject a promise at a later time. This can be useful in scenarios where you need to control the timing of the resolution or rejection, such as in testing or when dealing with asynchronous operations that don't natively return promises.
+
+```ts
+import { deferred } from "@mrspartak/promises"
+
+// Create a deferred promise
+const { promise, resolve, reject } = deferred<void>()
+
+setTimeout(() => {
+  // Resolve the promise
+  resolve()
+}, 1000)
+
+await promise // Will wait for 1 second before resolving
 ```

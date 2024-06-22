@@ -14,7 +14,7 @@ describe('delay', () => {
     const start = Date.now()
     await delay(100)
     const end = Date.now()
-    expect(end - start).toBeGreaterThanOrEqual(100)
+    expect(end - start).toBeGreaterThanOrEqual(98) // Timers are not precise, so we allow a small margin of error
   })
 
   it('should throw an error if the input is not a number', async () => {

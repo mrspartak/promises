@@ -11,7 +11,7 @@
 <br/>
 
 # 🔧 Typescript promise utilities
-@mrspartak/promises is toolbelt with useful promise utilities that also utilizing a power of Typescript
+@mrspartak/promises is a toolkit with useful promise utilities that utilize the power of TypeScript
 
 ## Contents
 - [Installation](#Installation)
